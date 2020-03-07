@@ -182,7 +182,30 @@ class CreateElements {
                         const div = document.createElement('div');
                         div.classList.add('user');    
                         div.innerText = user;
-                        div.onclick = () => {};
+                        
+                        div.onclick = () => {
+                            [...document.getElementsByClassName('user')].map(function (item) {
+                                item.addEventListener('click', function () {
+                                    console.log('click');
+                                    [...document.getElementsByClassName('user')].map(function (el) {
+                                        el.classList.remove('active');
+                                    });
+                                    this.classList.add('active');
+                            
+                                    chat.changeDialog(this.innerText).then(function (res) {
+                                        document.getElementById('messages').innerHTML = '';
+                            
+                                        for(const item of res.messages) {
+                                            const el = document.createElement('div');
+                                            el.classList.toggle(item.myself ? 'from' : 'to')
+                                            el.innerText = item.text;
+                                            document.getElementById('messages').appendChild(el);
+                                        }
+                                    });
+                                });
+                            });
+                        };
+
                         section.appendChild(div);
                     }
                 }).catch(function (err) {
@@ -246,36 +269,28 @@ document.getElementById('login').addEventListener('click', function (e) {
         document.getElementsByName('login')[0].value,
         document.getElementsByName('password')[0].value
     );
-
-    // [...document.getElementsByClassName('users')].map(function (el) {
-    //     el.classList.add('show');
-    // });
-
-    // [...document.getElementsByClassName('chat')].map(function (el) {
-    //     el.classList.add('show');
-    // });
 });
 
-[...document.getElementsByClassName('user')].map(function (item) {
-    item.addEventListener('click', function () {
-        console.log('click');
-        [...document.getElementsByClassName('user')].map(function (el) {
-            el.classList.remove('active');
-        });
-        this.classList.add('active');
+// [...document.getElementsByClassName('user')].map(function (item) {
+//     item.addEventListener('click', function () {
+//         console.log('click');
+//         [...document.getElementsByClassName('user')].map(function (el) {
+//             el.classList.remove('active');
+//         });
+//         this.classList.add('active');
 
-        chat.changeDialog(this.innerText).then(function (res) {
-            document.getElementById('messages').innerHTML = '';
+//         chat.changeDialog(this.innerText).then(function (res) {
+//             document.getElementById('messages').innerHTML = '';
 
-            for(const item of res.messages) {
-                const el = document.createElement('div');
-                el.classList.toggle(item.myself ? 'from' : 'to')
-                el.innerText = item.text;
-                document.getElementById('messages').appendChild(el);
-            }
-        });
-    });
-});
+//             for(const item of res.messages) {
+//                 const el = document.createElement('div');
+//                 el.classList.toggle(item.myself ? 'from' : 'to')
+//                 el.innerText = item.text;
+//                 document.getElementById('messages').appendChild(el);
+//             }
+//         });
+//     });
+// });
 
 document.getElementById('submit_message').addEventListener('click', function () {
     const text = document.getElementById('message').value;
