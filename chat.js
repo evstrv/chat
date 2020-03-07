@@ -182,6 +182,7 @@ class CreateElements {
                         const div = document.createElement('div');
                         div.classList.add('user');    
                         div.innerText = user;
+                        div.onclick = () => {};
                         section.appendChild(div);
                     }
                 }).catch(function (err) {
