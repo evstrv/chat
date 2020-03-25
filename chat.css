@@ -162,7 +162,6 @@ main section.chat > .message > button {
   border: none;
   border-radius: 0 0 10px 0;
   color: white;
-  text-transform: uppercase;
   font-size: .9rem;
 }
 

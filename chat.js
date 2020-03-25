@@ -147,7 +147,7 @@ class CreateElements {
             if(i == 2) {
                 input.id = 'login';
                 input.required = false;
-                input.value = 'Войти';
+                input.value = 'Sign in';
             }
             
             form.appendChild(input);
