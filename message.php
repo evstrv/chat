@@ -1,5 +1,4 @@
 <?php
-
 $link = mysqli_connect('localhost', 'root', '', 'evstrv');
 
 $post = json_decode(file_get_contents('php://input'), true);

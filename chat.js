@@ -182,27 +182,22 @@ class CreateElements {
                         const div = document.createElement('div');
                         div.classList.add('user');    
                         div.innerText = user;
-                        
+
                         div.onclick = () => {
-                            [...document.getElementsByClassName('user')].map(function (item) {
-                                item.addEventListener('click', function () {
-                                    console.log('click');
-                                    [...document.getElementsByClassName('user')].map(function (el) {
-                                        el.classList.remove('active');
-                                    });
-                                    this.classList.add('active');
+                            [...document.getElementsByClassName('user')].map(function (el) {
+                                el.classList.remove('active');
+                            });
+                            div.classList.add('active');
                             
-                                    chat.changeDialog(this.innerText).then(function (res) {
-                                        document.getElementById('messages').innerHTML = '';
+                            chat.changeDialog(div.innerText).then(function (res) {
+                                document.getElementById('messages').innerHTML = '';
                             
-                                        for(const item of res.messages) {
-                                            const el = document.createElement('div');
-                                            el.classList.toggle(item.myself ? 'from' : 'to')
-                                            el.innerText = item.text;
-                                            document.getElementById('messages').appendChild(el);
-                                        }
-                                    });
-                                });
+                                for(const item of res.messages) {
+                                    const el = document.createElement('div');
+                                    el.classList.toggle(item.myself ? 'from' : 'to')
+                                    el.innerText = item.text;
+                                    document.getElementById('messages').appendChild(el);
+                                }
                             });
                         };
 
