@@ -1,5 +1,5 @@
 <?php
-// date_default_timezone_set('Europe/Moscow');
+date_default_timezone_set('Europe/Moscow');
 $link = mysqli_connect('localhost', 'root', '', 'evstrv');
 
 $res = [
